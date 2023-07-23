@@ -104,8 +104,12 @@ func makeMRTitle(with taskNumber: String?, taskTitle: String?) -> String {
 }
 
 Task {
-    try await run()
-    exit(EXIT_SUCCESS)
+    do {
+        try await run()
+        exit(EXIT_SUCCESS)
+    } catch {
+        exit(EXIT_FAILURE)
+    }
 }
 
 RunLoop.current.run()
