@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		D2AF8FCC2A6DA57900F42D17 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FCB2A6DA57900F42D17 /* main.swift */; };
+		D2AF8FD82A6DB48000F42D17 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FD72A6DB48000F42D17 /* ErrorExtension.swift */; };
+		D2AF8FDA2A6DBB8700F42D17 /* CreateMRData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FD92A6DBB8700F42D17 /* CreateMRData.swift */; };
+		D2AF8FE02A6DCDD100F42D17 /* ConfigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FDF2A6DCDD100F42D17 /* ConfigData.swift */; };
+		D2AF8FE32A6DD6CD00F42D17 /* JiraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FE22A6DD6CD00F42D17 /* JiraAPI.swift */; };
+		D2AF8FE52A6DD77B00F42D17 /* GitlabAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FE42A6DD77B00F42D17 /* GitlabAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +30,11 @@
 /* Begin PBXFileReference section */
 		D2AF8FC82A6DA57900F42D17 /* GitlabHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GitlabHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AF8FCB2A6DA57900F42D17 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		D2AF8FD72A6DB48000F42D17 /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
+		D2AF8FD92A6DBB8700F42D17 /* CreateMRData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMRData.swift; sourceTree = "<group>"; };
+		D2AF8FDF2A6DCDD100F42D17 /* ConfigData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigData.swift; sourceTree = "<group>"; };
+		D2AF8FE22A6DD6CD00F42D17 /* JiraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraAPI.swift; sourceTree = "<group>"; };
+		D2AF8FE42A6DD77B00F42D17 /* GitlabAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitlabAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +68,37 @@
 			isa = PBXGroup;
 			children = (
 				D2AF8FCB2A6DA57900F42D17 /* main.swift */,
+				D2AF8FE12A6DD6C000F42D17 /* API */,
+				D2AF8FDC2A6DCD8100F42D17 /* Extensions */,
+				D2AF8FDB2A6DCD7500F42D17 /* Models */,
 			);
 			path = GitlabHelper;
+			sourceTree = "<group>";
+		};
+		D2AF8FDB2A6DCD7500F42D17 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D2AF8FD92A6DBB8700F42D17 /* CreateMRData.swift */,
+				D2AF8FDF2A6DCDD100F42D17 /* ConfigData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D2AF8FDC2A6DCD8100F42D17 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D2AF8FD72A6DB48000F42D17 /* ErrorExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D2AF8FE12A6DD6C000F42D17 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D2AF8FE22A6DD6CD00F42D17 /* JiraAPI.swift */,
+				D2AF8FE42A6DD77B00F42D17 /* GitlabAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,6 +117,8 @@
 			dependencies = (
 			);
 			name = GitlabHelper;
+			packageProductDependencies = (
+			);
 			productName = GitlabHelper;
 			productReference = D2AF8FC82A6DA57900F42D17 /* GitlabHelper */;
 			productType = "com.apple.product-type.tool";
@@ -106,6 +147,8 @@
 				Base,
 			);
 			mainGroup = D2AF8FBF2A6DA57900F42D17;
+			packageReferences = (
+			);
 			productRefGroup = D2AF8FC92A6DA57900F42D17 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -120,7 +163,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2AF8FD82A6DB48000F42D17 /* ErrorExtension.swift in Sources */,
 				D2AF8FCC2A6DA57900F42D17 /* main.swift in Sources */,
+				D2AF8FDA2A6DBB8700F42D17 /* CreateMRData.swift in Sources */,
+				D2AF8FE02A6DCDD100F42D17 /* ConfigData.swift in Sources */,
+				D2AF8FE32A6DD6CD00F42D17 /* JiraAPI.swift in Sources */,
+				D2AF8FE52A6DD77B00F42D17 /* GitlabAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
