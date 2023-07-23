@@ -2,10 +2,10 @@ import Foundation
 
 struct Config: Decodable {
     struct Gitlab: Decodable {
-        let projectId: String
+        let projectId: Int
         let gitlabAccessToken: String
-        let assigneeId: String
-        let reviewerIds: String?
+        let assigneeId: Int
+        let reviewerIds: [Int]?
     }
     
     struct Jira: Decodable {

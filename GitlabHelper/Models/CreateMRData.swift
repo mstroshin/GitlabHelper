@@ -4,8 +4,8 @@ struct CreateMRRequestData: Encodable {
     let title: String
     let source_branch: String
     let target_branch: String
-    let assignee_id: String?
-    let reviewer_ids: String?
+    let assignee_id: Int?
+    let reviewer_ids: [Int]?
 }
 
 struct CreateMRResponseData: Decodable {
