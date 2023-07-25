@@ -2,7 +2,7 @@ import Foundation
 
 func run() async throws {
     let config = try readConfig()
-    let sourceBranchName = try getSourceBranchName()
+    let sourceBranchName = try Terminal.execute(cmd: "git rev-parse --abbrev-ref HEAD")
     let targetBranchName = getTargetBranchName()
     let taskNumber = getTaskNumber(from: sourceBranchName)
     
@@ -21,6 +21,21 @@ func run() async throws {
         )
 }
 
+func getCommitsTitles(for taskNumber: String) throws -> [String] {
+    let commitsTitles = try Terminal.execute(cmd: "git log --oneline --format=%s --max-count=50")
+    
+    return commitsTitles
+        .split(separator: "\n")
+        .filter {
+            $0.hasPrefix(taskNumber)
+        }
+        .map {
+            $0.replacingOccurrences(of: #"MB-\d+:"#, with: "", options: .regularExpression)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        .reversed()
+}
+
 func readConfig() throws -> Config {
     guard CommandLine.arguments.count > 0 else {
         throw "Didn't find executable url"
@@ -32,38 +47,6 @@ func readConfig() throws -> Config {
     let jsonData = try Data(contentsOf: configURL)
     
     return try JSONDecoder().decode(Config.self, from: jsonData)
-}
-
-func getSourceBranchName() throws -> String {
-    // Create a Pipe for capturing the command output
-    let pipe = Pipe()
-    
-    // Create a Process for executing the git command
-    let process = Process()
-    process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-    process.arguments = ["git", "rev-parse", "--abbrev-ref", "HEAD"]
-    process.standardOutput = pipe
-    
-    // Launch the process
-    try process.run()
-    
-    // Read the command output
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .newlines)
-    
-    // Wait until the process finishes
-    process.waitUntilExit()
-    
-    // Check the exit status
-    if process.terminationStatus != 0 {
-        throw "Process termination status: \(Int(process.terminationStatus))"
-    }
-    
-    if let output {
-        return output
-    } else {
-        throw "Can't parse current branch name"
-    }
 }
 
 func getTargetBranchName() -> String {

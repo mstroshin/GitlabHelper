@@ -13,6 +13,7 @@
 		D2AF8FE02A6DCDD100F42D17 /* ConfigData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FDF2A6DCDD100F42D17 /* ConfigData.swift */; };
 		D2AF8FE32A6DD6CD00F42D17 /* JiraAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FE22A6DD6CD00F42D17 /* JiraAPI.swift */; };
 		D2AF8FE52A6DD77B00F42D17 /* GitlabAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FE42A6DD77B00F42D17 /* GitlabAPI.swift */; };
+		D2AF8FE72A6FE45B00F42D17 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AF8FE62A6FE45B00F42D17 /* Terminal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		D2AF8FDF2A6DCDD100F42D17 /* ConfigData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigData.swift; sourceTree = "<group>"; };
 		D2AF8FE22A6DD6CD00F42D17 /* JiraAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JiraAPI.swift; sourceTree = "<group>"; };
 		D2AF8FE42A6DD77B00F42D17 /* GitlabAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitlabAPI.swift; sourceTree = "<group>"; };
+		D2AF8FE62A6FE45B00F42D17 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				D2AF8FE22A6DD6CD00F42D17 /* JiraAPI.swift */,
 				D2AF8FE42A6DD77B00F42D17 /* GitlabAPI.swift */,
+				D2AF8FE62A6FE45B00F42D17 /* Terminal.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				D2AF8FE02A6DCDD100F42D17 /* ConfigData.swift in Sources */,
 				D2AF8FE32A6DD6CD00F42D17 /* JiraAPI.swift in Sources */,
 				D2AF8FE52A6DD77B00F42D17 /* GitlabAPI.swift in Sources */,
+				D2AF8FE72A6FE45B00F42D17 /* Terminal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
