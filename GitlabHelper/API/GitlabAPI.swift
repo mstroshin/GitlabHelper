@@ -9,16 +9,23 @@ final class GitlabAPI {
         self.config = config
     }
     
-    func createMergeRequest(with sourceBranch: String, targetBranch: String, title: String?) async throws {
+    func createMergeRequest(
+        with sourceBranch: String,
+        targetBranch: String,
+        title: String?,
+        description: String?
+    ) async throws {
         let endpoint = "\(baseURL)/projects/\(config.projectId)/merge_requests"
         let title = title ?? sourceBranch
         
         let requestData = CreateMRRequestData(
             title: title,
+            description: description,
             source_branch: sourceBranch,
             target_branch: targetBranch,
             assignee_id: config.assigneeId,
-            reviewer_ids: config.reviewerIds
+            reviewer_ids: config.reviewerIds,
+            remove_source_branch: true
         )
         
         // Create the request URL

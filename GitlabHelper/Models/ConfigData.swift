@@ -17,6 +17,11 @@ struct Config: Decodable {
         }
     }
     
+    struct ChatGPT: Decodable {
+        let accessToken: String
+    }
+    
     let gitlab: Gitlab
     let jira: Jira?
+    let chatGPT: ChatGPT?
 }

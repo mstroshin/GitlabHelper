@@ -7,18 +7,50 @@ func run() async throws {
     let taskNumber = getTaskNumber(from: sourceBranchName)
     
     var taskTitle: String?
-    if let config = config.jira, let taskNumber = taskNumber {
+    if let config = config.jira, let taskNumber {
         taskTitle = try? await JiraAPI(config: config).getTaskTitle(taskNumber: taskNumber)
     }
     
-    let mrTitle = makeMRTitle(with: taskNumber, taskTitle: taskTitle)
+    var chatGPTDescription: String?
+    if let config = config.chatGPT, let taskNumber, let taskTitle, let commitsTitles = try? getCommitsTitles(for: taskNumber) {
+        chatGPTDescription = try? await getChatGPTMRDescription(
+            for: taskTitle,
+            commitsTitles: commitsTitles,
+            config: config
+        )
+    }
     
+    let mrTitle = makeMRTitle(with: taskNumber, taskTitle: taskTitle)
+    let mrDesciption = createMRDescription(with: taskNumber, chatGPTDesc: chatGPTDescription)
+        
     try await GitlabAPI(config: config.gitlab)
         .createMergeRequest(
             with: sourceBranchName,
             targetBranch: targetBranchName,
-            title: mrTitle
+            title: mrTitle,
+            description: mrDesciption
         )
+}
+
+func createMRDescription(with taskNumber: String?, chatGPTDesc: String?) -> String? {
+    guard let taskNumber else {
+        return nil
+    }
+    guard let chatGPTDesc else {
+        return "Closes \(taskNumber)"
+    }
+    
+    return "ChatGPT description:\n\(chatGPTDesc)\n\nCloses \(taskNumber)"
+}
+
+func getChatGPTMRDescription(for taskTitle: String, commitsTitles: [String], config: Config.ChatGPT) async throws -> String {
+    let commitsTitles = commitsTitles.joined(separator: ", ")
+    let prompt = """
+        There are a task title "\(taskTitle)" and commits titles devided by comma "\(commitsTitles)"
+        Write what was done and don't mention commits and task titles
+    """
+    
+    return try await ChatGPTAPI(config: config).send(message: prompt)
 }
 
 func getCommitsTitles(for taskNumber: String) throws -> [String] {
