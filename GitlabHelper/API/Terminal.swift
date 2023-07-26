@@ -36,4 +36,11 @@ final class Terminal {
         }
     }
     
+    static func openInBrowser(url: String) {
+        let process = Process()
+        process.launchPath = "/usr/bin/open"
+        process.arguments = [url]
+        process.launch()
+    }
+    
 }

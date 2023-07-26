@@ -8,28 +8,43 @@ func run() async throws {
     
     var taskTitle: String?
     if let config = config.jira, let taskNumber {
+        print("Getting task title...")
         taskTitle = try? await JiraAPI(config: config).getTaskTitle(taskNumber: taskNumber)
+        if let taskTitle {
+            print("Task title: \(taskTitle)")
+        } else {
+            print("Couldn't get task title.")
+        }
     }
     
     var chatGPTDescription: String?
     if let config = config.chatGPT, let taskNumber, let taskTitle, let commitsTitles = try? getCommitsTitles(for: taskNumber) {
+        print("Getting merge request ChatGPT description...")
         chatGPTDescription = try? await getChatGPTMRDescription(
             for: taskTitle,
             commitsTitles: commitsTitles,
             config: config
         )
+        if let _ = chatGPTDescription {
+            print("Successfully completed.")
+        } else {
+            print("Completed with error.")
+        }
     }
     
     let mrTitle = makeMRTitle(with: taskNumber, taskTitle: taskTitle)
     let mrDesciption = createMRDescription(with: taskNumber, chatGPTDesc: chatGPTDescription)
-        
-    try await GitlabAPI(config: config.gitlab)
+    
+    let urlString = try await GitlabAPI(config: config.gitlab)
         .createMergeRequest(
             with: sourceBranchName,
             targetBranch: targetBranchName,
             title: mrTitle,
             description: mrDesciption
         )
+    print("MR was created successful: \(urlString)")
+    
+    Terminal.openInBrowser(url: urlString)
 }
 
 func createMRDescription(with taskNumber: String?, chatGPTDesc: String?) -> String? {

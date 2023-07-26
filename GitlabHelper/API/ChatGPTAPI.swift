@@ -31,19 +31,14 @@ final class ChatGPTAPI {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(requestData)
         
-        do {
-            let response = try await URLSession.shared.data(for: request)
-            let responseDataObject = try decoder.decode(CompletionResponseData.self, from: response.0)
-            
-            let answer = responseDataObject.choices.reduce("") { partialResult, choice in
-                partialResult + choice.message.content
-            }
-            
-            return answer
-        } catch {
-            print(error)
-            return ""
+        let response = try await URLSession.shared.data(for: request)
+        let responseDataObject = try decoder.decode(CompletionResponseData.self, from: response.0)
+        
+        let answer = responseDataObject.choices.reduce("") { partialResult, choice in
+            partialResult + choice.message.content
         }
+        
+        return answer
     }
 }
 

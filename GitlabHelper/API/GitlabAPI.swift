@@ -14,7 +14,7 @@ final class GitlabAPI {
         targetBranch: String,
         title: String?,
         description: String?
-    ) async throws {
+    ) async throws -> String {
         let endpoint = "\(baseURL)/projects/\(config.projectId)/merge_requests"
         let title = title ?? sourceBranch
         
@@ -42,7 +42,7 @@ final class GitlabAPI {
         let response = try await URLSession.shared.data(for: request)
         let responseDataObject = try decoder.decode(CreateMRResponseData.self, from: response.0)
         
-        print("MR was created successful: \(responseDataObject.web_url)")
+        return responseDataObject.web_url
     }
     
 }
