@@ -44,7 +44,7 @@ func run() async throws {
         )
     print("MR was created successful: \(urlString)")
     
-    Terminal.openInBrowser(url: urlString)
+    try Terminal.openInBrowser(url: urlString)
 }
 
 func createMRDescription(with taskNumber: String?, chatGPTDesc: String?) -> String? {
@@ -55,7 +55,7 @@ func createMRDescription(with taskNumber: String?, chatGPTDesc: String?) -> Stri
         return "Closes \(taskNumber)"
     }
     
-    return "ChatGPT description:\n\(chatGPTDesc)\n\nCloses \(taskNumber)"
+    return "ChatGPT description:\n\n\(chatGPTDesc)\n\nCloses \(taskNumber)"
 }
 
 func getChatGPTMRDescription(for taskTitle: String, commitsTitles: [String], config: Config.ChatGPT) async throws -> String {
@@ -97,7 +97,7 @@ func readConfig() throws -> Config {
 }
 
 func getTargetBranchName() -> String {
-    var targetBranchName = "develop"
+    var targetBranchName = "main"
     let arguments = CommandLine.arguments
     
     if arguments.count > 1 {

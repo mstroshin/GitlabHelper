@@ -1,7 +1,7 @@
 import Foundation
 
 final class JiraAPI {
-    private let baseURL = "https://diftech.atlassian.net/rest/api/latest"
+    private let baseURL = "https://platacard.atlassian.net/rest/api/latest"
     private let decoder = JSONDecoder()
     private let config: Config.Jira
     
