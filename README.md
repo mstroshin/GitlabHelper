@@ -9,3 +9,15 @@
 Как использовать:
 1. Запуск без аргументов. Тогда МР будет создан на main ветку.
 2. Запуск с аргументом названия ветки. Тогда МР будет создан на определенную ветку.
+3. Рекомендую положить скрипт GitlabHelper в папку на уровне с рабочей папкой bank и запускать через баш из Xcode:
+```#!/bin/sh
+osascript <<END
+tell application "Terminal"
+if not (exists window 1) then reopen
+activate
+do script "cd `pwd`;../GitlabHelper/GitlabHelper" in window 1
+end tell
+END
+```
+
+В папке cmd лежит пример конфига и сбилденный скрипт GitlabHelper
